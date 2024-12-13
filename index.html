@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification et Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Inscription</h2>
+        <form id="authForm">
+            <input type="text" id="name" placeholder="Nom complet" required />
+            <input type="email" id="email" placeholder="Adresse e-mail" required />
+            <input type="password" id="password" placeholder="Mot de passe" required />
+            <button type="submit">S'inscrire</button>
+        </form>
+        <br>
+        <h3>Paiement</h3>
+        <p>Veuillez effectuer le paiement pour accéder à l'application.</p>
+        <!-- Lien de paiement Chargily -->
+        <a href="https://epay.chargily.com.dz/payment-link?redirect_url=https://votre-domaine.com/easyappointment" target="_blank" id="paymentLink">
+            <button>Payer via Chargily</button>
+        </a>
+    </div>
+
+    <script>
+        // Bloquer le lien de paiement si le formulaire n'est pas rempli
+        document.getElementById('authForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Empêcher l'envoi du formulaire
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (name && email && password) {
+                alert("Inscription réussie ! Veuillez cliquer sur 'Payer via Chargily'.");
+                document.getElementById('paymentLink').style.pointerEvents = "auto"; // Activer le lien
+            } else {
+                alert("Veuillez remplir tous les champs !");
+            }
+        });
+
+        // Désactiver le lien de paiement par défaut
+        document.getElementById('paymentLink').style.pointerEvents = "none";
+    </script>
+</body>
+</html>
